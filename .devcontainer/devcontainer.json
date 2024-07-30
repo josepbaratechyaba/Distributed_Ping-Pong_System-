@@ -1,0 +1,16 @@
+// .devcontainer/devcontainer.json
+{
+    "name": "Java Open MPI",
+    "context": "..",
+    "dockerFile": "../Dockerfile",
+    "settings": {
+      "java.home": "/usr/lib/jvm/java-11-openjdk-amd64"
+    },
+    "extensions": [
+      "vscjava.vscode-java-pack",
+      "ms-azuretools.vscode-docker"
+    ],
+    "workspaceFolder": "/app",
+    "workspaceMount": "source=${localWorkspaceFolder},target=/app,type=bind"
+  }
+  
