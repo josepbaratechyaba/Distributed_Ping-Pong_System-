@@ -42,11 +42,11 @@ public class RoundRobin {
             int destinationRank = (rank + 1) % size; //as per ring method, the current node will send the message to the node+1 
             MPI.COMM_WORLD.recv(buffer, bufferSize, MPI.BYTE, sourceRank, 0);
             String receivedMessage = new String(buffer, StandardCharsets.UTF_8).trim();
-            receivedMessage += " worker" + rank;
+            receivedMessage += " worker" + rank; // adding current node to the message
             buffer = new byte[bufferSize]; //updating the buffer
             byte[] updatedMessageBytes = receivedMessage.getBytes(StandardCharsets.UTF_8);
             System.arraycopy(updatedMessageBytes, 0, buffer, 0, updatedMessageBytes.length);
-            MPI.COMM_WORLD.send(buffer, bufferSize, MPI.BYTE, destinationRank, 0);
+            MPI.COMM_WORLD.send(buffer, bufferSize, MPI.BYTE, destinationRank, 0); //send the message to the next node
             System.out.println("Worker " + rank + " received message and added its identifier");
         }
 
